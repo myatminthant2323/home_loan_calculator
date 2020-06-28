@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Loan Calculator</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		body{
+			font-weight: bold;
+
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+
+		$(function() {
+			$('.calc').click(function() {
+
+				let y = $('#year').val();
+				let l = $('#loan').val();
+				let i = $('#interest').val();
+
+				let ll = parseInt(l , 10);
+				let ii = (parseInt(i , 10)/100)/12;
+				let yy = parseInt(y, 10)*12;
+
+				let month = 1;
+				let tot_interest = 0;
+
+				let monthly = ll * ii * ( Math.pow((1 + ii), yy) /( Math.pow((1 + ii), yy) - 1));
+
+				
+				let tds = '<tr>';
+				jQuery.each($('tr:last', this), function () {
+					tds += "<td>"+(y * 12)+"</td><td>"+l+"</td><td>"+i+"</td><td>"+monthly.toFixed()+"</td>";
+				});
+				tds += '</tr>';
+				$('#tbody1', this).append(tds);
+
+				for (let i = yy; i > 0 ; i--) {
+
+					interest = ll * ii;
+					const principle = parseInt(ll.toFixed()).toLocaleString();
+					const rate = parseInt(interest.toFixed()).toLocaleString();
+					const  p_month= parseInt(monthly.toFixed()).toLocaleString();
+					let per_month='<tr>';
+					per_month+="<td>Month # "+ month++ +"</td>";
+					per_month+="<td>"+ principle +" ကျပ်</td>";
+					per_month+="<td>"+ rate +" ကျပ်</td>";
+					per_month+="<td>"+ p_month +" ကျပ်</td>";
+					per_month+="</tr>";
+					$("#tbody1").append(per_month);
+					ll = ll + interest - monthly;
+					tot_interest += interest;
+				}				
+
+				const month_pay = parseInt(monthly.toFixed()).toLocaleString();
+				const totalInterest = parseInt(tot_interest.toFixed()).toLocaleString();
+				// const l_amount = parseInt(ll.toFixed()).toLocaleString();
+
+				let tdata = "<tr>";
+				tdata += "<th>လစဉ် ငွေပေးချေမှု</th>";
+				tdata += "<td>"+ month_pay +" ကျပ်</td>"	
+				tdata += "</tr>";
+				tdata += "<tr>";
+				tdata += "<th>(1) နှစ်အတွင်း စုစုပေါင်းအတိုး</th>";
+				tdata += "<td>"+ totalInterest +" ကျပ်</td>"
+				tdata += "</tr>";
+				tdata += "<tr>";
+				tdata += "<th>ချေးငွေ ပမာဏ</th>";	
+				tdata += "<td>"+l+" ကျပ်</td>"
+				tdata += "</tr>";
+				tdata += "<tr>";
+				tdata += "<th>အတိုးနှုန်း</th>";
+				tdata += "<td>"+i+"%</td>"
+				tdata += "</tr>";
+				tdata += "<tr>";
+				tdata += "<th>ချေးယူမည့် နှစ်ပမာဏ</th>";
+				tdata += "<td>"+y+" နှစ်</td>"
+				tdata += "</tr>";
+				$('#tbody2').html(tdata);
+
+				$('#res').slideDown('fast');
+				
+				
+				
+
+				$('#res').slideDown('fast');
+
+				// $('tbody').html("<tr><td>"+(y * 12)+"</td><td>"+l+"</td><td>"+i+"</td><td>"+Math.round(monthly / 10)+"</td></tr>");
+			});
+		});
+	</script>
+	<div class="jumbotron jumbotron-fluid bg-light text-dark">
+		<div class="container">
+			<h1>Home Loan Calculator</h1>
+			<h4>အိမ်ရာချေးငွေတွက်ချက်ရန်</h4>
+		</div>
+		
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+
+			</div>
+			<div class="col-md-6">
+				<form class="">
+					<div class="form-group row">
+						<label for="fno" class="col-sm-4 col-form-label">ချေးငွေ ပမာဏ :</label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" id="loan">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="sno" class="col-sm-4 col-form-label">အတိုးနှုန်း :</label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" id="interest">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="sno" class="col-sm-4 col-form-label">ချေးယူမည့် နှစ်ပမာဏ :</label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" id="year">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 offset-5">
+							<button type="button" class="btn btn-outline-primary text-center btn-block calc">တွက်ချက်ပါ</button>
+						</div>
+					</div>
+				</form>		
+			</div>
+			<div class="col-md-3">
+
+			</div>
+		</div>
+		<div class="container m-3" style="display: none" id="res">
+			<div class="row">
+				<div class="col-md-4 offset-1">
+					<table class="table table-bordered" id="myTable2">
+						<thead class="bg-light">
+							<tr>
+								<th colspan="4" class="text-center">
+									ချေးငွေပေးသွင်းမှု ပုံစံ (Your Loan Payment)
+								</th>
+							</tr>
+						</thead>
+						<tbody id="tbody2">
+
+						</tbody>
+						<tfoot></tfoot>
+					</table>
+				</div>
+				<div class="col-md-7">
+					<div class="row">
+						<div class="col-md-12 p-0">
+							<table class="table table-bordered" id="myTable">
+								<thead class="bg-light">
+									<tr>
+										<th colspan="4" class="text-center">
+											(၁) နှစ်တာ ချေးငွေပေးသွင်းမှု ပုံစံ (Loan Payment over 1 Years)
+										</th>
+									</tr>
+									<tr>
+										<th>ငွေပေးချေမည့် လ အရေအတွက်</th>
+										<th>ချေးယူမည့်ပမာဏ</th>
+										<th>အတိုးနှုန်း</th>
+										<th>လစဉ် ငွေပေးချေမှု</th>
+									</tr>
+								</thead>
+								<tbody id="tbody1">
+
+								</tbody>
+								<tfoot></tfoot>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+			</div>	
+		</div>
+
+	</div>
+
+</body>
+</html>
