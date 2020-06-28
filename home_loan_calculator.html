@@ -82,12 +82,11 @@
 				tdata += "</tr>";
 				$('#tbody2').html(tdata);
 
-				$('#res').slideDown('fast');
 				
-				
+				$('#tbody2').slideDown('fast');
 				
 
-				$('#res').slideDown('fast');
+				$('#tbody1').slideDown('fast');
 
 				// $('tbody').html("<tr><td>"+(y * 12)+"</td><td>"+l+"</td><td>"+i+"</td><td>"+Math.round(monthly / 10)+"</td></tr>");
 			});
@@ -100,43 +99,42 @@
 		</div>
 		
 	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-3">
 
+	<div class="container pt-3 pb-4">
+
+		<form>
+			<div class="row mb-3 offset-lg-2">
+				<label for="fno" class="col-form-label col-4 col-lg-3">ချေးငွေ ပမာဏ :</label>
+				<div class="col-8 col-lg-6">
+					<input type="number" class="form-control" id="loan">	
+				</div>
 			</div>
-			<div class="col-md-6">
-				<form class="">
-					<div class="form-group row">
-						<label for="fno" class="col-sm-4 col-form-label">ချေးငွေ ပမာဏ :</label>
-						<div class="col-sm-8">
-							<input type="number" class="form-control" id="loan">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="sno" class="col-sm-4 col-form-label">အတိုးနှုန်း :</label>
-						<div class="col-sm-8">
-							<input type="number" class="form-control" id="interest">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="sno" class="col-sm-4 col-form-label">ချေးယူမည့် နှစ်ပမာဏ :</label>
-						<div class="col-sm-8">
-							<input type="number" class="form-control" id="year">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3 offset-5">
+
+			<div class="row mb-3 offset-lg-2">
+				<label for="sno" class="col-form-label col-4 col-lg-3">အတိုးနှုန်း :</label>
+				<div class="col-8 col-lg-6">
+					<input type="number" class="form-control" id="interest">
+				</div>
+			</div>
+
+			<div class="row mb-3 offset-lg-2">
+				<label for="sno" class="col-form-label col-4 col-lg-3">ချေးယူမည့် နှစ်ပမာဏ :</label>
+				<div class="col-8 col-lg-6">
+					<input type="number" class="form-control" id="year">
+				</div>
+			</div>
+
+			<div class="row justify-content-center">
+						<div class="col-md-3">
 							<button type="button" class="btn btn-outline-primary text-center btn-block calc">တွက်ချက်ပါ</button>
 						</div>
 					</div>
-				</form>		
-			</div>
-			<div class="col-md-3">
 
-			</div>
-		</div>
-		<div class="container m-3" style="display: none" id="res">
+		</form>
+	</div>
+
+		
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4 offset-1">
 					<table class="table table-bordered" id="myTable2">
@@ -147,13 +145,13 @@
 								</th>
 							</tr>
 						</thead>
-						<tbody id="tbody2">
+						<tbody id="tbody2" style="display: none;">
 
 						</tbody>
 						<tfoot></tfoot>
 					</table>
 				</div>
-				<div class="col-md-7">
+				<div class="col-md-6 mr-2">
 					<div class="row">
 						<div class="col-md-12 p-0">
 							<table class="table table-bordered" id="myTable">
@@ -170,7 +168,7 @@
 										<th>လစဉ် ငွေပေးချေမှု</th>
 									</tr>
 								</thead>
-								<tbody id="tbody1">
+								<tbody id="tbody1" style="display: none;">
 
 								</tbody>
 								<tfoot></tfoot>
@@ -182,7 +180,6 @@
 			</div>	
 		</div>
 
-	</div>
 
 </body>
 </html>
